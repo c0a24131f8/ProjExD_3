@@ -94,10 +94,10 @@ class Beam:
         ビーム画像Surfaceを生成する
         引数 bird：ビームを放つこうかとん（Birdインスタンス）
         """
-        self.img = pg.image.load(f"fig/beam.png") #beam surface
-        self.rct = self.img.get_rect() #beam rect
-        self.rct.centery = bird.rct.centery #こうかとんの中心縦座標
-        self.rct.left = bird.rct.right #こうかとんの右座標
+        self.img = pg.image.load(f"fig/beam.png") #　beam surface
+        self.rct = self.img.get_rect() #　beam rect
+        self.rct.centery = bird.rct.centery #　こうかとんの中心縦座標
+        self.rct.left = bird.rct.right #　こうかとんの右座標
         self.vx, self.vy = +5, 0
 
     def update(self, screen: pg.Surface):
@@ -140,7 +140,7 @@ class Bomb:
         self.rct.move_ip(self.vx, self.vy)
         screen.blit(self.img, self.rct)
 
-#途中
+#　途中
 class Score:
     """
     スコアのクラス
@@ -168,13 +168,13 @@ def main():
     bg_img = pg.image.load("fig/pg_bg.jpg")
     bird = Bird((300, 200))
     bomb = Bomb((255, 0, 0), 10)
-    bombs = list() #爆弾用の空のリスト
+    bombs = list() #　爆弾用の空のリスト
     for _ in range(NUM_OF_BOMBS):
         bombs.append(Bomb((255, 0, 0), 10))
     #bombs = [Bomb((255, 0, 0), 10) for _ in range(NUM_OF_BOMBS)]
     score = Score((0,0,255),0)
     beam = None  # ゲーム初期化時にはビームは存在しない
-    beams = list() #ビーム用の空のリスト
+    beams = list() #　ビーム用の空のリスト
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -201,16 +201,17 @@ def main():
         for b, bomb in enumerate(bombs):
             for be, beam in enumerate(beams):
                 if beam.rct.colliderect(bomb.rct):
-                    #ビームと爆弾の衝突判定
+                    #　ビームと爆弾の衝突判定
                     beams[be] = None
                     bombs[b] = None
                     bird.change_img(6, screen)
-                    #スコア更新
+                    #　スコア更新
                     score.score += 1
                 beams = [beam for beam in beams if beam is not None]
                 score.update(screen)
             bombs = [bomb for bomb in bombs if bomb is not None]
             
+
 
         
         for be, beam in enumerate(beams):
